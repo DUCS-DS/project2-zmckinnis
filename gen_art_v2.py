@@ -97,15 +97,26 @@ while not quit:
         node.reflect()
         node.draw()
 
+    nodes = sorted(nodes, key=lambda node: node.x)
+
+  #  for i, node1 in enumerate(nodes):
+   #     x1, y1 = node1.x, node1.y
+    #    for node2 in nodes[i + 1 :]:
+     #       x2, y2 = node2.x, node2.y
+      #      d_squared = (x1 - x2) ** 2 + (y1 - y2) ** 2
+       #     if d_squared < thresh:
+        #        pygame.draw.aaline(
+         #           screen, blue((thresh - d_squared) / thresh), (x1, y1), (x2, y2)
+          #      )
+
     for i, node1 in enumerate(nodes):
-        x1, y1 = node1.x, node1.y
-        for node2 in nodes[i + 1 :]:
+        x1, y1 = node1.x, node1.y1
+        for j in range(i + 1, min(i + 20, len(nodes))):
+            node2 = nodes[j]
             x2, y2 = node2.x, node2.y
             d_squared = (x1 - x2) ** 2 + (y1 - y2) ** 2
             if d_squared < thresh:
-                pygame.draw.aaline(
-                    screen, blue((thresh - d_squared) / thresh), (x1, y1), (x2, y2)
-                )
+                pygame.draw.aaline(screen, blue((thresh - d_squared) / thresh), (x1, y1), (x2, y2))
 
     clock.tick(60)
     pygame.display.flip()
